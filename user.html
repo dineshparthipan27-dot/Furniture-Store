@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>User Dashboard</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --aura-gold: #d4b85e;
+            --aura-gold-light: rgba(212, 184, 94, 0.15);
+            --aura-gold-dark: #b89a42;
+            --aura-dark: #241c18;
+            --aura-brown: #4a3b32;
+            --aura-warm: #faf9f6;
+            --card-bg: #ffffff;
+            --border-color: rgba(74, 59, 50, 0.12);
+            --text-dark: #241c18;
+            --text-muted: #786c65;
+            --sidebar-bg: #1a1411;
+            --sidebar-hover: #2d231e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--aura-warm);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .gold-italic {
+            color: var(--aura-gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1000;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.2);
+            border-right: 1px solid rgba(212, 184, 94, 0.15);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(36, 28, 24, 0.7);
+            z-index: 999;
+            backdrop-filter: blur(4px);
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-header {
+            padding: 30px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 184, 94, 0.12);
+            background: #120e0c;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: var(--aura-gold);
+            font-size: 20px;
+        }
+
+        .close-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--aura-gold);
+            cursor: pointer;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 25px 0;
+            overflow-y: auto;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: #b5aba4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .menu-link i {
+            font-size: 17px;
+            width: 25px;
+            text-align: center;
+            color: #8c8077;
+            transition: color 0.3s;
+        }
+
+        .menu-link:hover {
+            background-color: var(--sidebar-hover);
+            color: #ffffff;
+        }
+
+        .menu-link:hover i {
+            color: var(--aura-gold);
+        }
+
+        .menu-link.active {
+            background: linear-gradient(90deg, rgba(212, 184, 94, 0.15) 0%, transparent 100%);
+            color: #ffffff;
+            border-left: 4px solid var(--aura-gold);
+        }
+
+        .menu-link.active i {
+            color: var(--aura-gold);
+        }
+
+        .sidebar-bottom {
+            padding: 20px 24px;
+            border-top: 1px solid rgba(212, 184, 94, 0.12);
+        }
+
+        .logout-btn {
+            color: #e57373 !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+            transform: translateX(4px);
+        }
+
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            min-height: 100vh;
+            width: calc(100% - 280px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-header {
+            background-color: #ffffff;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 998;
+            box-shadow: 0 4px 20px rgba(36, 28, 24, 0.03);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--aura-gold-light);
+            color: var(--aura-dark);
+            border: 1px solid var(--aura-gold);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .greeting h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--aura-dark);
+            font-weight: 700;
+        }
+
+        .welcome-name {
+            font-family: 'Poppins', sans-serif;
+            color: var(--aura-gold-dark);
+            font-weight: 500;
+            font-size: 15px;
+            margin-left: 5px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: right;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--aura-gold-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .user-email {
+            font-size: 13px;
+            color: var(--aura-dark);
+            font-weight: 600;
+            display: block;
+        }
+
+        .user-avatar i {
+            font-size: 38px;
+            color: var(--aura-dark);
+        }
+
+
+        .view-section {
+            display: none;
+            padding: 35px 40px;
+            flex-direction: column;
+            gap: 30px;
+            animation: softFadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .view-section.active {
+            display: flex;
+        }
+
+        @keyframes softFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-anim {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-anim.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--aura-dark);
+            border-left: 4px solid var(--aura-gold);
+            padding-left: 12px;
+            font-weight: 700;
+        }
+
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(36, 28, 24, 0.04);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.35s ease;
+            cursor: default;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--aura-gold);
+            box-shadow: 0 15px 35px rgba(212, 184, 94, 0.15);
+        }
+
+        .stat-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--aura-dark);
+            font-weight: 700;
+        }
+
+        .stat-details p {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
+        }
+
+
+        .content-box {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(36, 28, 24, 0.04);
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+        .three-col-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+
+        .tracking-container {
+            padding: 20px 0;
+        }
+
+        .order-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .order-meta h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--aura-dark);
+        }
+
+        .order-meta span {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .progress-track {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .progress-track::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 65%;
+            height: 4px;
+            background: var(--aura-gold);
+            z-index: 2;
+            transition: width 1s ease;
+        }
+
+        .step {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            width: 25%;
+        }
+
+        .step-icon {
+            width: 34px;
+            height: 34px;
+            background: #f0f0f0;
+            color: #a0a0a0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.3s;
+            border: 3px solid #fff;
+        }
+
+        .step.active .step-icon {
+            background: var(--aura-gold);
+            color: #fff;
+            box-shadow: 0 0 0 3px var(--aura-gold-light);
+        }
+
+        .step p {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .step.active p {
+            color: var(--aura-dark);
+        }
+
+
+        .timeline {
+            margin-top: 15px;
+            border-left: 2px solid rgba(212, 184, 94, 0.4);
+            padding-left: 25px;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--aura-gold);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px rgba(212, 184, 94, 0.4);
+        }
+
+        .time-badge {
+            font-size: 11px;
+            background: var(--aura-gold-light);
+            color: var(--aura-brown);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            min-width: 600px;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--aura-warm);
+            color: var(--aura-brown);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .status {
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status.confirmed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status.crafting {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .status.transit {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .status.alert {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+
+        .action-btn {
+            background: var(--aura-gold-light);
+            color: var(--aura-dark);
+            border: 1px solid var(--aura-gold);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            background: var(--aura-dark);
+            color: var(--aura-gold);
+            border-color: var(--aura-dark);
+        }
+
+        .main-btn {
+            background: var(--aura-dark);
+            color: var(--aura-gold);
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid var(--aura-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.35s;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .main-btn:hover {
+            background: var(--aura-gold);
+            color: var(--aura-dark);
+            border-color: var(--aura-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 184, 94, 0.3);
+        }
+
+
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .media-item {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(36, 28, 24, 0.08);
+            border-color: var(--aura-gold);
+        }
+
+        .media-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+            transition: 0.3s;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .media-info {
+            padding: 16px;
+        }
+
+        .media-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            margin-bottom: 6px;
+            color: var(--aura-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .media-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+
+        .profile-form {
+            width: 100%;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--aura-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+            background: var(--aura-warm);
+            transition: all 0.3s;
+            color: var(--aura-dark);
+            font-family: 'Poppins';
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            border-color: var(--aura-gold);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px var(--aura-gold-light);
+        }
+
+        .error-msg {
+            display: none;
+            color: #d9534f;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+            animation: softFadeIn 0.3s;
+        }
+
+        .input-error {
+            border-color: #d9534f !important;
+            background-color: #fff8f8 !important;
+        }
+
+        .success-msg {
+            display: none;
+            color: #276749;
+            background: #c6f6d5;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #9ae6b4;
+        }
+
+        .shake-anim {
+            animation: premiumShake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes premiumShake {
+
+            10%,
+            90% {
+                transform: translate3d(-2px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(4px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-6px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(6px, 0, 0);
+            }
+        }
+
+
+        @media (max-width: 1200px) {
+
+            .two-col-grid,
+            .three-col-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .menu-toggle,
+            .close-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-header {
+                padding: 15px 20px;
+            }
+
+            .view-section {
+                padding: 20px 15px;
+                gap: 20px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step p {
+                font-size: 10px;
+            }
+
+            .content-box {
+                padding: 20px;
+            }
+        }
+
+        .logo-img {
+            width: 150px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .logo-da {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo-da i {
+            font-size: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                    <div class="logo-da">
+                        <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+                    </div>
+                    <button class="close-btn" id="closeSidebar"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li><a class="menu-link active" data-target="overview-view">
+                            <i class="fa-solid fa-house-chimney"></i> My Sanctuary
+                        </a></li>
+                    <li><a class="menu-link" data-target="orders-view">
+                            <i class="fa-solid fa-couch"></i> Bespoke Orders
+                        </a></li>
+                    <li><a class="menu-link" data-target="appointments-view">
+                            <i class="fa-solid fa-calendar-check"></i> Consultations
+                        </a></li>
+                    <li><a class="menu-link" data-target="wishlist-view">
+                            <i class="fa-solid fa-heart"></i> Saved Collection
+                        </a></li>
+                    <li><a class="menu-link" data-target="profile-view">
+                            <i class="fa-solid fa-user-pen"></i> Profile & Settings
+                        </a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="logout-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+                </a>
+            </div>
+        </aside>
+
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="openSidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="greeting">
+                        <h1 id="page-title">My Sanctuary</h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-info">
+                            <span class="user-role">Aura VIP Member</span>
+                            <span class="user-email" id="displayEmail">user@example.com</span>
+                        </div>
+                        <div class="user-avatar">
+                            <i class="fa-solid fa-circle-user" style="color: var(--aura-gold);"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <div id="overview-view" class="view-section active">
+
+                <h2 style="font-family: 'Playfair Display'; font-size: 32px; margin-bottom: -10px;" class="scroll-anim">
+                    <span id="welcomeGreeting">Welcome,</span>
+                </h2>
+
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--aura-gold-light); color: var(--aura-dark);">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>02</h3>
+                            <p>Active Commissions</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #eef2ff; color: #4338ca;">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>01</h3>
+                            <p>Upcoming Appointment</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #b45309;">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>14</h3>
+                            <p>Saved Inspirations</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Current Production Status</h2>
+                        <div class="tracking-container">
+                            <div class="order-meta">
+                                <h4>Nordic Smoked Oak Table</h4>
+                                <span>Order #AL-8924</span>
+                            </div>
+                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Estimated
+                                Delivery: <strong>Nov 15, 2026</strong></p>
+
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                                <div class="step active">
+                                    <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+                                    <p>Sourcing</p>
+                                </div>
+                                <div class="step active">
+                                    <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+                                    <p>Crafting</p>
+                                </div>
+                                <div class="step active">
+                                    <div class="step-icon"><i class="fa-solid fa-paint-roller"></i></div>
+                                    <p>Finishing</p>
+                                </div>
+                                <div class="step">
+                                    <div class="step-icon"><i class="fa-solid fa-truck"></i></div>
+                                    <p>Delivery</p>
+                                </div>
+                            </div>
+                            <a href="404.html" class="action-btn"
+                                style="width: 100%; text-align: center; margin-top: 10px;">Track Detailed Progress</a>
+                        </div>
+                    </section>
+
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Recent Updates</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">Today</span> Masterclass Series</h4>
+                                <p>New video added: "The Art of Wood Conditioning".</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">Yesterday</span> Swatch Delivered</h4>
+                                <p>Your requested Velvet Navy fabric swatch has been delivered to your address.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">2 Days Ago</span> Blueprint Approved</h4>
+                                <p>You approved the 3D CAD design for the Floating Console.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+
+            <div id="orders-view" class="view-section">
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Active & Recent Commissions</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Signature Piece</th>
+                                    <th>Order Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Invoice</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#AL-8924</strong></td>
+                                    <td>Nordic Smoked Oak Table</td>
+                                    <td>Sep 02, 2026</td>
+                                    <td>$12,500</td>
+                                    <td><span class="status crafting">In Production</span></td>
+                                    <td><a href="404.html" class="action-btn"><i class="fa-solid fa-download"></i>
+                                            PDF</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#AL-8890</strong></td>
+                                    <td>Midnight Velvet Lounge Chair</td>
+                                    <td>Aug 15, 2026</td>
+                                    <td>$4,800</td>
+                                    <td><span class="status transit">Shipped</span></td>
+                                    <td><a href="404.html" class="action-btn"><i class="fa-solid fa-download"></i>
+                                            PDF</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#AL-8102</strong></td>
+                                    <td>Brushed Brass Floor Lamp</td>
+                                    <td>Feb 10, 2026</td>
+                                    <td>$2,200</td>
+                                    <td><span class="status confirmed">Delivered</span></td>
+                                    <td><a href="404.html" class="action-btn"><i class="fa-solid fa-download"></i>
+                                            PDF</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Payment History</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Transaction Date</th>
+                                    <th>Description</th>
+                                    <th>Method</th>
+                                    <th>Amount Paid</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sep 02, 2026</td>
+                                    <td>Initial Deposit (50%) - Order #AL-8924</td>
+                                    <td>Amex **** 1024</td>
+                                    <td>$6,250</td>
+                                    <td><span class="status confirmed">Successful</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Aug 15, 2026</td>
+                                    <td>Full Payment - Order #AL-8890</td>
+                                    <td>Visa **** 4920</td>
+                                    <td>$4,800</td>
+                                    <td><span class="status confirmed">Successful</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Care & Maintenance Guides</h2>
+                    <div class="two-col-grid" style="gap: 20px;">
+                        <div
+                            style="padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-tree" style="font-size: 30px; color: var(--aura-gold);"></i>
+                            <div>
+                                <h4 style="font-size: 15px; margin-bottom: 5px;">Solid Wood Care</h4>
+                                <a href="404.html"
+                                    style="font-size: 12px; color: var(--text-muted); font-weight: 600; text-decoration: none;">Download
+                                    Guide <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div
+                            style="padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-spray-can" style="font-size: 30px; color: var(--aura-gold);"></i>
+                            <div>
+                                <h4 style="font-size: 15px; margin-bottom: 5px;">Premium Upholstery Care</h4>
+                                <a href="404.html"
+                                    style="font-size: 12px; color: var(--text-muted); font-weight: 600; text-decoration: none;">Download
+                                    Guide <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="appointments-view" class="view-section">
+
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Book a Consultation</h2>
+                        <form id="bookingForm" class="profile-form" novalidate>
+                            <div class="success-msg" id="bookingSuccess">Appointment Request Sent Successfully!</div>
+
+                            <div class="input-group">
+                                <label>Consultation Type</label>
+                                <select id="bookType" required>
+                                    <option value="" selected disabled>Select Type</option>
+                                    <option value="virtual">Virtual 3D Tour & Design Call</option>
+                                    <option value="inperson">In-Person Showroom Visit</option>
+                                    <option value="home">Home Styling Visit</option>
+                                </select>
+                                <div class="error-msg" id="err-bookType">Please select a consultation type.</div>
+                            </div>
+
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <div class="input-group" style="flex: 1;">
+                                    <label>Preferred Date</label>
+                                    <input type="date" id="bookDate" required>
+                                    <div class="error-msg" id="err-bookDate">Please select a valid date.</div>
+                                </div>
+                                <div class="input-group" style="flex: 1;">
+                                    <label>Preferred Time</label>
+                                    <input type="time" id="bookTime" required>
+                                    <div class="error-msg" id="err-bookTime">Please select a time.</div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Project Brief / Notes</label>
+                                <textarea id="bookNotes" rows="3"
+                                    placeholder="Tell us what you are looking to design..."></textarea>
+                            </div>
+
+                            <button type="submit" class="main-btn">Request Appointment</button>
+                        </form>
+                    </section>
+
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Next Scheduled Visit</h2>
+                        <div
+                            style="background: var(--aura-warm); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                            <div
+                                style="width: 70px; height: 70px; background: var(--aura-dark); color: var(--aura-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 15px;">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <h3 style="font-family: 'Playfair Display'; font-size: 22px; margin-bottom: 5px;">Mayfair
+                                Flagship Salon</h3>
+                            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">Oct 24, 2026 at
+                                2:00 PM</p>
+                            <p style="font-size: 13px; margin-bottom: 20px;"><strong>Consultant:</strong> Charlotte
+                                Sterling</p>
+                            <a href="404.html" class="action-btn"
+                                style="padding: 10px 20px; font-size: 12px; width: max-content; margin: 0 auto;">Reschedule</a>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Appointment History</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Consultant</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Aug 10, 2026 - 11:00 AM</strong></td>
+                                    <td>Matteo Rossi</td>
+                                    <td><i class="fa-solid fa-video"></i> Virtual 3D Tour</td>
+                                    <td><span class="status confirmed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Jan 15, 2026 - 4:30 PM</strong></td>
+                                    <td>Arthur Pendelton</td>
+                                    <td><i class="fa-solid fa-phone"></i> Initial Phone Call</td>
+                                    <td><span class="status confirmed">Completed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="wishlist-view" class="view-section">
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">My Saved Collection</h2>
+                    <div class="media-gallery">
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f4.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Floating Oak Console</h4>
+                                <div class="media-meta"><span>Nordic Collection</span><span>$3,200</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f5.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Aura Muted Brass Lamp</h4>
+                                <div class="media-meta"><span>Accents</span><span>$1,450</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f6.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Cashmere Bouclé Sofa</h4>
+                                <div class="media-meta"><span>Lounge Series</span><span>$8,900</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f7.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Nero Marquina Center Table</h4>
+                                <div class="media-meta"><span>Stone Series</span><span>$5,500</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f8.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Velvet Dining Chair (Set of 6)</h4>
+                                <div class="media-meta"><span>Dining Collection</span><span>$7,200</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <div class="heart-icon"><i class="fa-solid fa-heart"></i></div>
+                            <img src="./asset/f9.webp" class="media-img" alt="Furniture">
+                            <div class="media-info">
+                                <h4>Tuscan Walnut Bed Frame</h4>
+                                <div class="media-meta"><span>Master Suite</span><span>$11,000</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">Inquire
+                                    Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Curated Inspiration Boards</h2>
+                    <div class="two-col-grid">
+                        <div
+                            style="height: 200px; border-radius: 14px; background: url('./asset/f25.webp') center/cover; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 20px;">
+                            <div
+                                style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                            </div>
+                            <h3
+                                style="color: #fff; position: relative; z-index: 2; font-family: 'Playfair Display'; font-size: 22px;">
+                                Modern Minimalist Living</h3>
+                        </div>
+                        <div
+                            style="height: 200px; border-radius: 14px; background: url('./asset/f17.webp') center/cover; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 20px;">
+                            <div
+                                style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                            </div>
+                            <h3
+                                style="color: #fff; position: relative; z-index: 2; font-family: 'Playfair Display'; font-size: 22px;">
+                                Dark Wood Acadamia</h3>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <div id="profile-view" class="view-section">
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Personal Information</h2>
+                        <form id="profileForm" class="profile-form" novalidate>
+                            <div class="success-msg" id="profSuccess">Profile Updated Successfully!</div>
+                            <div class="input-group">
+                                <label>Full Name</label>
+                                <input type="text" id="profileName" value="John Doe" required>
+                                <div class="error-msg" id="err-profileName">Please enter a valid name (letters only).
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Email Address</label>
+                                <input type="email" id="profileEmail" value="user@example.com" readonly
+                                    style="background: #f0f0f0; cursor: not-allowed;">
+                            </div>
+                            <div class="input-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="profilePhone" value="5551234567" required>
+                                <div class="error-msg" id="err-profilePhone">Please enter a valid phone number.</div>
+                            </div>
+                            <button type="submit" class="main-btn">Save Changes</button>
+                        </form>
+                    </section>
+
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Delivery Address</h2>
+                        <form id="addressForm" class="profile-form" novalidate>
+                            <div class="success-msg" id="addrSuccess">Address Updated Successfully!</div>
+                            <div class="input-group">
+                                <label>Street Address</label>
+                                <textarea id="addrStreet" rows="2" required>123 Luxury Avenue, Penthouse 4B</textarea>
+                                <div class="error-msg" id="err-addrStreet">Street address cannot be empty.</div>
+                            </div>
+                            <div style="display: flex; gap: 15px;">
+                                <div class="input-group" style="flex: 1;">
+                                    <label>City</label>
+                                    <input type="text" id="addrCity" value="New York" required>
+                                    <div class="error-msg" id="err-addrCity">Enter a valid city.</div>
+                                </div>
+                                <div class="input-group" style="flex: 1;">
+                                    <label>Zip Code</label>
+                                    <input type="text" id="addrZip" value="10001" required>
+                                    <div class="error-msg" id="err-addrZip">Enter a valid Zip.</div>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Country</label>
+                                <select id="addrCountry" required>
+                                    <option value="US" selected>United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="AE">UAE</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="main-btn"
+                                style="background: transparent; color: var(--aura-dark); border: 2px solid var(--aura-dark);">Update
+                                Address</button>
+                        </form>
+                    </section>
+                </div>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Change Password</h2>
+                    <form id="passwordForm" class="profile-form" style="max-width: 500px;" novalidate>
+                        <div class="success-msg" id="passSuccess">Password Changed Successfully!</div>
+                        <div class="input-group">
+                            <label>Current Password</label>
+                            <input type="password" id="currPass" required>
+                            <div class="error-msg" id="err-currPass">Enter your current password.</div>
+                        </div>
+                        <div class="input-group">
+                            <label>New Password</label>
+                            <input type="password" id="newPass" required>
+                            <div class="error-msg" id="err-newPass">Password must be at least 6 characters.</div>
+                        </div>
+                        <div class="input-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confPass" required>
+                            <div class="error-msg" id="err-confPass">Passwords do not match.</div>
+                        </div>
+                        <button type="submit" class="main-btn">Update Password</button>
+                    </form>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+
+        const emailValue = localStorage.getItem("UserMail");
+        const defaultEmail = "guest@auraliving.com";
+        const activeEmail = emailValue || defaultEmail;
+
+        const extractedName = activeEmail.split("@")[0];
+        const formattedName = extractedName.charAt(0).toUpperCase() + extractedName.slice(1);
+
+        document.getElementById("displayEmail").textContent = activeEmail;
+        document.getElementById("profileEmail").value = activeEmail;
+        document.getElementById("profileName").value = formattedName;
+
+        const welcomeEl = document.getElementById("welcomeGreeting");
+        if (welcomeEl) {
+            welcomeEl.innerHTML = `Welcome back, <span class="gold-italic">${formattedName}</span> ✨`;
+        }
+
+
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const openSidebarBtn = document.getElementById('openSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+
+        function openSidebar() { sidebar.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeSidebar() { sidebar.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = 'auto'; }
+
+        openSidebarBtn.addEventListener('click', openSidebar);
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+
+        const menuLinks = document.querySelectorAll('.sidebar-menu .menu-link');
+        const views = document.querySelectorAll('.view-section');
+        const pageTitle = document.getElementById('page-title');
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                if (this.classList.contains('active')) return;
+
+                menuLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                views.forEach(v => v.classList.remove('active'));
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+
+                pageTitle.innerHTML = `${this.innerText.trim()}`;
+
+                if (window.innerWidth <= 992) { closeSidebar(); }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                triggerAnimations();
+            });
+        });
+
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function triggerAnimations() {
+            const animElements = document.querySelectorAll('.scroll-anim');
+            animElements.forEach(el => {
+                el.classList.remove('show');
+                observer.observe(el);
+            });
+        }
+        triggerAnimations();
+
+
+
+
+        function showError(inputEl, errorId) {
+            inputEl.classList.add('input-error', 'shake-anim');
+            document.getElementById(errorId).style.display = 'block';
+            setTimeout(() => { inputEl.classList.remove('shake-anim'); }, 400);
+        }
+
+        function clearErrors(formElement) {
+            const inputs = formElement.querySelectorAll('input, textarea, select');
+            const errors = formElement.querySelectorAll('.error-msg');
+            inputs.forEach(input => input.classList.remove('input-error'));
+            errors.forEach(err => err.style.display = 'none');
+        }
+
+
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', function () {
+                this.classList.remove('input-error');
+                const errBox = this.nextElementSibling;
+                if (errBox && errBox.classList.contains('error-msg')) errBox.style.display = 'none';
+            });
+        });
+
+
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearErrors(this);
+            document.getElementById('bookingSuccess').style.display = 'none';
+
+            let isValid = true;
+            const type = document.getElementById('bookType');
+            const date = document.getElementById('bookDate');
+            const time = document.getElementById('bookTime');
+
+            if (type.value === "") { showError(type, 'err-bookType'); isValid = false; }
+            if (date.value === "") { showError(date, 'err-bookDate'); isValid = false; }
+            if (time.value === "") { showError(time, 'err-bookTime'); isValid = false; }
+
+            if (isValid) {
+                document.getElementById('bookingSuccess').style.display = 'block';
+                setTimeout(() => { this.reset(); document.getElementById('bookingSuccess').style.display = 'none';
+                    window.location.href = '404.html'
+                 }, 300);
+            }
+        });
+
+
+        const profileName = document.getElementById('profileName');
+        const profilePhone = document.getElementById('profilePhone');
+
+        profileName.addEventListener('input', function () { this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); });
+        profilePhone.addEventListener('input', function () { this.value = this.value.replace(/[^0-9\+\-\s\(\)]/g, ''); });
+
+        document.getElementById('profileForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearErrors(this);
+            document.getElementById('profSuccess').style.display = 'none';
+
+            let isValid = true;
+            if (profileName.value.trim().length < 3) { showError(profileName, 'err-profileName'); isValid = false; }
+            if (profilePhone.value.trim().length < 7) { showError(profilePhone, 'err-profilePhone'); isValid = false; }
+
+            if (isValid) {
+                document.getElementById('profSuccess').style.display = 'block';
+                setTimeout(() => { document.getElementById('profSuccess').style.display = 'none';
+                    window.location.href = '404.html'
+                 }, 300);
+            }
+        });
+
+
+        document.getElementById('addressForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearErrors(this);
+            document.getElementById('addrSuccess').style.display = 'none';
+
+            let isValid = true;
+            const street = document.getElementById('addrStreet');
+            const city = document.getElementById('addrCity');
+            const zip = document.getElementById('addrZip');
+
+            if (street.value.trim() === "") { showError(street, 'err-addrStreet'); isValid = false; }
+            if (city.value.trim() === "") { showError(city, 'err-addrCity'); isValid = false; }
+            if (zip.value.trim() === "") { showError(zip, 'err-addrZip'); isValid = false; }
+
+            if (isValid) {
+                document.getElementById('addrSuccess').style.display = 'block';
+                setTimeout(() => { document.getElementById('addrSuccess').style.display = 'none';
+                    window.location.href = '404.html'
+                 }, 300);
+            }
+        });
+
+
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearErrors(this);
+            document.getElementById('passSuccess').style.display = 'none';
+
+            let isValid = true;
+            const curr = document.getElementById('currPass');
+            const newP = document.getElementById('newPass');
+            const conf = document.getElementById('confPass');
+
+            if (curr.value.trim() === "") { showError(curr, 'err-currPass'); isValid = false; }
+            if (newP.value.trim().length < 6) { showError(newP, 'err-newPass'); isValid = false; }
+            if (newP.value !== conf.value || conf.value === "") { showError(conf, 'err-confPass'); isValid = false; }
+
+            if (isValid) {
+                document.getElementById('passSuccess').style.display = 'block';
+                setTimeout(() => { this.reset(); document.getElementById('passSuccess').style.display = 'none'; 
+                    window.location.href = '404.html'
+                }, 300);
+            }
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

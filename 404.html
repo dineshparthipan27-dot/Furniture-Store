@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Aura Living</title>
+    
+     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1411;  
+            color: #ffffff;
+            overflow: hidden;  
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+         
+        .error-bg-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            max-width: 800px;
+            max-height: 800px;
+            background: radial-gradient(circle, rgba(212, 184, 94, 0.15) 0%, rgba(26, 20, 17, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+         
+        .error-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+        }
+
+         
+        .error-code {
+            font-family: 'Playfair Display', serif;
+            font-size: 160px;
+            font-weight: 700;
+            color: #d4b85e;  
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 15px 35px rgba(212, 184, 94, 0.2);
+            animation: floatAnim 4s ease-in-out infinite;
+        }
+
+        .error-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .error-title .gold-italic {
+            color: #d4b85e;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .error-desc {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+         
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 2px solid transparent;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn i {
+            font-size: 16px;
+            transition: transform 0.4s ease;
+        }
+
+         
+        .btn-primary {
+            background-color: #d4b85e;
+            color: #1a1411;
+            border-color: #d4b85e;
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: #d4b85e;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 184, 94, 0.2);
+        }
+
+         
+        .btn-outline {
+            background-color: transparent;
+            color: #d4b85e;
+            border-color: rgba(212, 184, 94, 0.5);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(212, 184, 94, 0.1);
+            border-color: #d4b85e;
+            color: #ffffff;
+            transform: translateY(-5px);
+        }
+
+        .btn-outline:hover i {
+            transform: translateX(-5px);  
+        }
+
+         
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+         
+        @media screen and (max-width: 768px) {
+            .error-code {
+                font-size: 110px;
+            }
+            .error-title {
+                font-size: 30px;
+            }
+            .error-desc {
+                font-size: 14px;
+                padding: 0 10px;
+            }
+            .btn-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+     
+    <div class="error-bg-glow"></div>
+
+     
+    <div class="error-content">
+        <div class="error-code fade-in">404</div>
+        <h1 class="error-title fade-in delay-1">Page Not <span class="gold-italic">Found</span></h1>
+        <p class="error-desc fade-in delay-2">We couldn't find the page you're looking for. It might have been moved, renamed, or is temporarily unavailable.</p>
+        
+        <div class="btn-group fade-in delay-3">
+            <button onclick="goBack()" class="btn btn-outline">
+                <i class="fa-solid fa-arrow-left-long"></i> Go Back
+            </button>
+            <button onclick="goHome()" class="btn btn-primary">
+                <i class="fa-solid fa-house"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+     
+    <script>
+ 
+        function goBack() {
+ 
+            if (window.history.length > 1 && document.referrer !== "") {
+                window.history.back();
+            } else {
+ 
+                window.location.href = 'index.html'; 
+            }
+        }
+
+ 
+        function goHome() {
+ 
+            window.location.href = 'index.html'; 
+        }
+    </script>
+
+</body>
+</html>

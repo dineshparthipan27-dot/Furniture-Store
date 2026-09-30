@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --aura-gold: #d4b85e;
+            --aura-gold-light: rgba(212, 184, 94, 0.15);
+            --aura-gold-dark: #b89a42;
+            --aura-dark: #241c18;
+            --aura-brown: #4a3b32;
+            --aura-warm: #faf9f6;
+            --card-bg: #ffffff;
+            --border-color: rgba(74, 59, 50, 0.12);
+            --text-dark: #241c18;
+            --text-muted: #786c65;
+            --sidebar-bg: #1c1512;
+            --sidebar-hover: #2d231e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--aura-warm);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .gold-italic {
+            color: var(--aura-gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+         
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1000;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 4px 0 25px rgba(0, 0, 0, 0.2);
+            border-right: 1px solid rgba(212, 184, 94, 0.15);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(36, 28, 24, 0.7);
+            z-index: 999;
+            backdrop-filter: blur(4px);
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-header {
+            padding: 30px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 184, 94, 0.12);
+            background: #150f0d;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: var(--aura-gold);
+            font-size: 20px;
+        }
+
+        .close-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: var(--aura-gold);
+            cursor: pointer;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 25px 0;
+            overflow-y: auto;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: #b5aba4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .menu-link i {
+            font-size: 17px;
+            width: 25px;
+            text-align: center;
+            color: #8c8077;
+            transition: color 0.3s;
+        }
+
+        .menu-link:hover {
+            background-color: var(--sidebar-hover);
+            color: #ffffff;
+        }
+
+        .menu-link:hover i {
+            color: var(--aura-gold);
+        }
+
+        .menu-link.active {
+            background: linear-gradient(90deg, rgba(212, 184, 94, 0.15) 0%, transparent 100%);
+            color: #ffffff;
+            border-left: 4px solid var(--aura-gold);
+        }
+
+        .menu-link.active i {
+            color: var(--aura-gold);
+        }
+
+        .sidebar-bottom {
+            padding: 20px 24px;
+            border-top: 1px solid rgba(212, 184, 94, 0.12);
+        }
+
+        .logout-btn {
+            color: #e57373 !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+            transform: translateX(4px);
+        }
+
+         
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            min-height: 100vh;
+            width: calc(100% - 280px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-header {
+            background-color: #ffffff;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 998;
+            box-shadow: 0 4px 20px rgba(36, 28, 24, 0.03);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--aura-gold-light);
+            color: var(--aura-dark);
+            border: 1px solid var(--aura-gold);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .greeting h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--aura-dark);
+            font-weight: 700;
+        }
+
+        .welcome-name {
+            font-family: 'Poppins', sans-serif;
+            color: var(--aura-gold-dark);
+            font-weight: 500;
+            font-size: 15px;
+            margin-left: 5px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: right;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--aura-gold-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        .user-email {
+            font-size: 13px;
+            color: var(--aura-dark);
+            font-weight: 600;
+            display: block;
+        }
+
+        .user-avatar i {
+            font-size: 38px;
+            color: var(--aura-dark);
+        }
+
+         
+        .view-section {
+            display: none;
+            padding: 35px 40px;
+            flex-direction: column;
+            gap: 30px;
+            animation: softFadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .view-section.active {
+            display: flex;
+        }
+
+        @keyframes softFadeIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-anim {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-anim.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--aura-dark);
+            border-left: 4px solid var(--aura-gold);
+            padding-left: 12px;
+            font-weight: 700;
+        }
+
+         
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(36, 28, 24, 0.04);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.35s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--aura-gold);
+            box-shadow: 0 15px 35px rgba(212, 184, 94, 0.15);
+        }
+
+        .stat-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--aura-dark);
+            font-weight: 700;
+        }
+
+        .stat-details p {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
+        }
+
+         
+        .content-box {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(36, 28, 24, 0.04);
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+
+         
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        
+        .progress-item-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--aura-dark);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--aura-gold-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--aura-gold);
+            border-radius: 10px;
+        }
+
+         
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            min-width: 650px;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--aura-warm);
+            color: var(--aura-brown);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .status {
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status.confirmed { background: #dcfce7; color: #15803d; }
+        .status.crafting { background: #fef3c7; color: #b45309; }
+        .status.transit { background: #e0f2fe; color: #0369a1; }
+        .status.alert { background: #fee2e2; color: #b91c1c; }
+
+        .action-btn {
+            background: var(--aura-gold-light);
+            color: var(--aura-dark);
+            border: 1px solid var(--aura-gold);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .action-btn:hover {
+            background: var(--aura-dark);
+            color: var(--aura-gold);
+            border-color: var(--aura-dark);
+        }
+
+         
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .media-item {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(36, 28, 24, 0.08);
+            border-color: var(--aura-gold);
+        }
+
+        .media-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .media-info {
+            padding: 16px;
+        }
+
+        .media-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: var(--aura-dark);
+        }
+
+        .media-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+         
+        .timeline {
+            margin-top: 15px;
+            border-left: 2px solid rgba(212, 184, 94, 0.4);
+            padding-left: 25px;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--aura-gold);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px rgba(212, 184, 94, 0.4);
+        }
+
+        .time-badge {
+            font-size: 11px;
+            background: var(--aura-gold-light);
+            color: var(--aura-brown);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+         
+        .info-card {
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card.warning {
+            background: #fffbeb;
+            border-color: #fcd34d;
+        }
+
+        .info-card.danger {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+
+        .info-card i {
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .info-card.warning i { color: #d97706; }
+        .info-card.danger i { color: #dc2626; }
+
+        .info-card h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--aura-dark);
+        }
+        .info-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+         
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; width: 100%; }
+            .menu-toggle, .close-btn { display: block; }
+            .two-col-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .top-header { padding: 15px 20px; }
+            .view-section { padding: 20px 15px; gap: 20px; }
+            .user-info { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .content-box{
+                width: 295px;
+            }
+        }
+
+
+         .logo-img {
+            width: 150px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .logo-da {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo-da i {
+            font-size: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+         
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-header">
+                     <div class="logo-da">
+                        <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+                    </div>
+                    <button class="close-btn" id="closeSidebar"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li><a class="menu-link active" data-target="dashboard-view">
+                        <i class="fa-solid fa-chart-line"></i> Atelier Analytics
+                    </a></li>
+                    <li><a class="menu-link" data-target="bespoke-view">
+                        <i class="fa-solid fa-couch"></i> Bespoke Commissions
+                    </a></li>
+                    <li><a class="menu-link" data-target="showrooms-view">
+                        <i class="fa-solid fa-map-location-dot"></i> Global Showrooms
+                    </a></li>
+                    <li><a class="menu-link" data-target="consultations-view">
+                        <i class="fa-solid fa-calendar-check"></i> VIP Consultations
+                    </a></li>
+                    <li><a class="menu-link" data-target="catalog-view">
+                        <i class="fa-solid fa-swatchbook"></i> Material & Catalog
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="logout-btn">
+                    <i class="fa-solid fa-power-off"></i> Exit 
+                </a>
+            </div>
+        </aside>
+
+         
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="openSidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="greeting">
+                        <h1 id="page-title">Atelier <span class="gold-italic">Analytics</span> <span class="welcome-name">| Welcome</span></h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <div class="user-info">
+                            <span class="user-role">Head Concierge</span>
+                            <span class="user-email" id="displayEmail">concierge@auraliving.com</span>
+                        </div>
+                        <div class="user-avatar">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+             
+            <div id="dashboard-view" class="view-section active">
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--aura-gold-light); color: var(--aura-dark);">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>$1,842,500</h3>
+                            <p>YTD Bespoke Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #eef2ff; color: #4338ca;">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>48 Pieces</h3>
+                            <p>Active Productions</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #b45309;">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>24</h3>
+                            <p>New VIP Clients</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #15803d;">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>98.6%</h3>
+                            <p>Satisfaction Score</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Global Acquisition (2026)</h2>
+                        <div class="chart-container">
+                            <canvas id="trafficChart"></canvas>
+                        </div>
+                    </section>
+                    
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Top Selling Categories</h2>
+                        <div class="progress-wrap" style="margin-top: 30px;">
+                            <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Living Room & Sofas</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%;"></div></div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Solid Dining Tables</span>
+                                    <span>28%</span>
+                                </div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 28%;"></div></div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Master Bedroom Suites</span>
+                                    <span>15%</span>
+                                </div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 15%;"></div></div>
+                            </div>
+                            <div class="progress-item">
+                                <div class="progress-item-header">
+                                    <span>Brass & Lighting Accents</span>
+                                    <span>12%</span>
+                                </div>
+                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 12%;"></div></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Quarterly Performance Milestones</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Region Flagship</th>
+                                    <th>Signature Piece Sold</th>
+                                    <th>Revenue</th>
+                                    <th>Artisan Lead</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>New York Flagship</strong></td>
+                                    <td>Hand-Carved Nordic Oak Table</td>
+                                    <td>$24,500</td>
+                                    <td>Master Lucas V.</td>
+                                    <td><span class="status confirmed">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>London Mayfair</strong></td>
+                                    <td>Full-Grain Saddle Leather Sofa</td>
+                                    <td>$32,000</td>
+                                    <td>Atelier Florence</td>
+                                    <td><span class="status crafting">Hand-Stitching</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Milan Brera</strong></td>
+                                    <td>Brushed Brass Credenza</td>
+                                    <td>$18,400</td>
+                                    <td>Gianni & Sons</td>
+                                    <td><span class="status transit">In Transit</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dubai Marina</strong></td>
+                                    <td>Velvet & Gold Lounge Chair (Set)</td>
+                                    <td>$45,000</td>
+                                    <td>Studio Elite</td>
+                                    <td><span class="status crafting">Cushion Framing</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Paris Le Marais</strong></td>
+                                    <td>Marble Top Center Table</td>
+                                    <td>$12,800</td>
+                                    <td>Pierre Designs</td>
+                                    <td><span class="status confirmed">Delivered</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+             
+            <div id="bespoke-view" class="view-section">
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fee2e2; color: #991b1b;">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>06</h3>
+                            <p>Priority Custom Designs</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #b45309;">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>14</h3>
+                            <p>Pending Approvals</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e0f2fe; color: #0369a1;">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>09</h3>
+                            <p>Ready for Dispatch</p>
+                        </div>
+                    </div>
+                </section>
+
+                 
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Active Production Pipeline</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Bespoke Piece</th>
+                                    <th>Assigned Artisan</th>
+                                    <th>Est. Completion</th>
+                                    <th>Current Phase</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Lord Harrington</strong></td>
+                                    <td>12-Seater Mahogany Dining</td>
+                                    <td>Woodworks Guild UK</td>
+                                    <td>Oct 15, 2026</td>
+                                    <td><span class="status crafting">Wood Joinery (40%)</span></td>
+                                    <td><a href="404.html" class="action-btn">View CAD</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Elena Rostova</strong></td>
+                                    <td>Curved Bouclé Sectional</td>
+                                    <td>Atelier Florence</td>
+                                    <td>Nov 02, 2026</td>
+                                    <td><span class="status crafting">Upholstery (80%)</span></td>
+                                    <td><a href="404.html" class="action-btn">View CAD</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sheikh Al Maktoum</strong></td>
+                                    <td>Gold-leaf Media Console</td>
+                                    <td>Gianni & Sons</td>
+                                    <td>Sep 28, 2026</td>
+                                    <td><span class="status transit">Polishing (95%)</span></td>
+                                    <td><a href="404.html" class="action-btn">View CAD</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Isabella Cruz</strong></td>
+                                    <td>Floating Marble Bed Frame</td>
+                                    <td>Stone Crafters Italy</td>
+                                    <td>Oct 20, 2026</td>
+                                    <td><span class="status alert">Material Delayed</span></td>
+                                    <td><a href="404.html" class="action-btn">Update</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dr. Chen Wei</strong></td>
+                                    <td>Walnut Executive Desk</td>
+                                    <td>Master Lucas V.</td>
+                                    <td>Sep 30, 2026</td>
+                                    <td><span class="status confirmed">Ready to Ship</span></td>
+                                    <td><a href="404.html" class="action-btn">Dispatch</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Quality Control & Alerts</h2>
+                        <div class="info-card danger">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <h4>Marble Delay for Cruz Order</h4>
+                                <p>Calacatta Gold marble shipment delayed at customs. ETA pushed by 4 days.</p>
+                            </div>
+                        </div>
+                        <div class="info-card warning">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <div>
+                                <h4>Fabric Swatch Pending</h4>
+                                <p>Still waiting for client approval on the Velvet Navy swatch for the lounge chair.</p>
+                            </div>
+                        </div>
+                        <div class="info-card warning">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <div>
+                                <h4>Artisan Capacity Reached</h4>
+                                <p>Atelier Florence cannot take new upholstery orders until Nov 1st.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-box scroll-anim">
+                        <h2 class="section-title">Live Atelier Updates</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">14:15</span> Material Sourced</h4>
+                                <p>Tuscan Walnut lumber arrived for the <i>Milan Residence Suite</i>.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">12:00</span> Finish Approved</h4>
+                                <p>Lead Architect signed off on the Champagne Gold leaf gilding.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">09:30</span> Quality Inspection</h4>
+                                <p>Harrington Dining Table passed grain balance & structural test.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4><span class="time-badge">Yesterday</span> Blueprint Sent</h4>
+                                <p>3D CAD sent to client <i>Chen Wei</i> for final dimensions approval.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+             
+            <div id="showrooms-view" class="view-section">
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--aura-gold-light); color: var(--aura-dark);">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>08</h3>
+                            <p>Global Flagships</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #eef2ff; color: #4338ca;">
+                            <i class="fa-solid fa-users-line"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>12,450</h3>
+                            <p>Weekly Footfall</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #15803d;">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>14%</h3>
+                            <p>Visit-to-Sale Conversion</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Worldwide Flagship Performance & Inventory</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Showroom Location</th>
+                                    <th>Head Stylist</th>
+                                    <th>Floor Displays</th>
+                                    <th>Weekly Traffic</th>
+                                    <th>Status / Event</th>
+                                    <th>Restock Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>New York (5th Ave)</strong></td>
+                                    <td>Arthur Pendelton</td>
+                                    <td>34 Exclusive Models</td>
+                                    <td><strong>1,450</strong></td>
+                                    <td><span class="status confirmed">Open • High Demand</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>London (Mayfair)</strong></td>
+                                    <td>Charlotte Sterling</td>
+                                    <td>28 Exclusive Models</td>
+                                    <td><strong>980</strong></td>
+                                    <td><span class="status crafting">Curating Winter Set</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Milan (Brera)</strong></td>
+                                    <td>Matteo Rossi</td>
+                                    <td>40 Exclusive Models</td>
+                                    <td><strong>1,890</strong></td>
+                                    <td><span class="status confirmed">Design Week VIP</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dubai (Design Dist)</strong></td>
+                                    <td>Layla Hassan</td>
+                                    <td>22 Exclusive Models</td>
+                                    <td><strong>760</strong></td>
+                                    <td><span class="status confirmed">Open • VIP Only</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Paris (Le Marais)</strong></td>
+                                    <td>Jean-Luc Dupont</td>
+                                    <td>25 Exclusive Models</td>
+                                    <td><strong>1,120</strong></td>
+                                    <td><span class="status alert">Low Inventory</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tokyo (Ginza)</strong></td>
+                                    <td>Yuki Takahashi</td>
+                                    <td>18 Exclusive Models</td>
+                                    <td><strong>1,300</strong></td>
+                                    <td><span class="status transit">Stock Arriving Soon</span></td>
+                                    <td><a href="404.html" class="action-btn">Request Stock</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+             
+            <div id="consultations-view" class="view-section">
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--aura-gold-light); color: var(--aura-dark);">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>14</h3>
+                            <p>Calls Scheduled Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e0e7ff; color: #4338ca;">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>104</h3>
+                            <p>Unread Concierge Emails</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #b45309;">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>05</h3>
+                            <p>Home Visit Requests</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="two-col-grid">
+                    <section class="content-box scroll-anim" style="grid-column: 1 / -1;">
+                        <h2 class="section-title">Today's Appointment Schedule</h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Client / Architect</th>
+                                        <th>Consultation Type</th>
+                                        <th>Assigned To</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>10:30 AM</strong></td>
+                                        <td>Studio Stefano (Milan Villa)</td>
+                                        <td><i class="fa-solid fa-video" style="color: var(--aura-gold);"></i> Virtual 3D Tour</td>
+                                        <td>Matteo Rossi</td>
+                                        <td><span class="status confirmed">Confirmed</span></td>
+                                        <td><a href="404.html" class="action-btn">Join Meet</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>01:00 PM</strong></td>
+                                        <td>Harrington Penthouse Suite</td>
+                                        <td><i class="fa-solid fa-map-pin" style="color: var(--aura-gold);"></i> In-Person Mayfair Salon</td>
+                                        <td>Charlotte Sterling</td>
+                                        <td><span class="status crafting">Preparing Swatches</span></td>
+                                        <td><a href="404.html" class="action-btn">View Brief</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>03:15 PM</strong></td>
+                                        <td>Mr. Richard Branson (Agent)</td>
+                                        <td><i class="fa-solid fa-phone" style="color: var(--aura-gold);"></i> Quick Requirement Call</td>
+                                        <td>Arthur Pendelton</td>
+                                        <td><span class="status confirmed">Confirmed</span></td>
+                                        <td><a href="404.html" class="action-btn">View Brief</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>05:00 PM</strong></td>
+                                        <td>Vogue Magazine Editor</td>
+                                        <td><i class="fa-solid fa-couch" style="color: var(--aura-gold);"></i> Exclusive Preview</td>
+                                        <td>Jean-Luc Dupont</td>
+                                        <td><span class="status transit">Waiting for Client</span></td>
+                                        <td><a href="404.html" class="action-btn">Join Meet</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>06:30 PM</strong></td>
+                                        <td>Dr. Chen Wei</td>
+                                        <td><i class="fa-solid fa-map-pin" style="color: var(--aura-gold);"></i> In-Person NY Flagship</td>
+                                        <td>Arthur Pendelton</td>
+                                        <td><span class="status alert">Rescheduled</span></td>
+                                        <td><a href="404.html" class="action-btn">View Brief</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+             
+            <div id="catalog-view" class="view-section">
+                <section class="stats-grid scroll-anim">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--aura-gold-light); color: var(--aura-dark);">
+                            <i class="fa-solid fa-swatchbook"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>1,240</h3>
+                            <p>Swatches & Finishes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: #b45309;">
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>100% FSC</h3>
+                            <p>Ethical European Timber</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fee2e2; color: #991b1b;">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <div class="stat-details">
+                            <h3>03</h3>
+                            <p>Low Stock Materials</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Signature Atelier Finishes Gallery</h2>
+                    <div class="media-gallery">
+                        <div class="media-item">
+                            <img src="./asset/f1.webp" class="media-img" alt="Nordic Oak">
+                            <div class="media-info">
+                                <h4>Nordic Smoked Oak</h4>
+                                <div class="media-meta"><span>Solid Hardwood</span><span>Grade AAA</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="./asset/f4.webp" class="media-img" alt="Brushed Brass">
+                            <div class="media-info">
+                                <h4>Aura Muted Brass</h4>
+                                <div class="media-meta"><span>Hand-Patinated</span><span>Anti-Tarnish</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="./asset/f5.webp" class="media-img" alt="Italian Boucle">
+                            <div class="media-info">
+                                <h4>Cream Cashmere Bouclé</h4>
+                                <div class="media-meta"><span>Upholstery</span><span>Organic</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="./asset/f6.webp" class="media-img" alt="Black Marble">
+                            <div class="media-info">
+                                <h4>Nero Marquina Marble</h4>
+                                <div class="media-meta"><span>Natural Stone</span><span>Polished</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="./asset/f7.webp" class="media-img" alt="Velvet">
+                            <div class="media-info">
+                                <h4>Midnight Navy Velvet</h4>
+                                <div class="media-meta"><span>Upholstery</span><span>Stain-Resist</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                        <div class="media-item">
+                            <img src="./asset/f9.webp" class="media-img" alt="Walnut">
+                            <div class="media-info">
+                                <h4>Tuscan Deep Walnut</h4>
+                                <div class="media-meta"><span>Solid Hardwood</span><span>Matte Finish</span></div>
+                                <a href="404.html" class="action-btn" style="width: 100%; text-align: center;">View Specs</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="content-box scroll-anim">
+                    <h2 class="section-title">Supplier Incoming Pipeline</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Supplier Name</th>
+                                    <th>Material Type</th>
+                                    <th>Quantity</th>
+                                    <th>ETA</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Stone Crafters Italy</strong></td>
+                                    <td>Calacatta Gold Marble Slabs</td>
+                                    <td>12 Slabs</td>
+                                    <td>Oct 10, 2026</td>
+                                    <td><span class="status transit">In Transit (Sea Freight)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>European Timber Co.</strong></td>
+                                    <td>FSC Tuscan Walnut</td>
+                                    <td>500 Sq.Ft</td>
+                                    <td>Sep 29, 2026</td>
+                                    <td><span class="status confirmed">Arriving Tomorrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Milan Upholsteries</strong></td>
+                                    <td>Cashmere Bouclé Rolls</td>
+                                    <td>20 Rolls</td>
+                                    <td>Oct 05, 2026</td>
+                                    <td><span class="status crafting">Custom Dyeing</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Brass Masters UK</strong></td>
+                                    <td>Custom Drawer Pulls</td>
+                                    <td>200 Units</td>
+                                    <td>Oct 12, 2026</td>
+                                    <td><span class="status alert">Delayed by 1 Week</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+     
+    <script>
+ 
+        const emailValue = localStorage.getItem("UserMail");
+        const defaultEmail = "concierge@auraliving.com";
+        const activeEmail = emailValue || defaultEmail;
+
+        const extractedName = activeEmail.split("@")[0];
+        const formattedName = extractedName.charAt(0).toUpperCase() + extractedName.slice(1);
+
+        document.getElementById("displayEmail").textContent = activeEmail;
+        const welcomeEl = document.querySelector(".welcome-name");
+        if (welcomeEl) {
+            welcomeEl.innerHTML = `| Welcome, <span style="color: var(--aura-gold); font-weight: 700;">${formattedName}</span> ✨`;
+        }
+
+ 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const openSidebarBtn = document.getElementById('openSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        openSidebarBtn.addEventListener('click', openSidebar);
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+ 
+        const menuLinks = document.querySelectorAll('.sidebar-menu .menu-link');
+        const views = document.querySelectorAll('.view-section');
+        const pageTitle = document.getElementById('page-title');
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                if (this.classList.contains('active')) return;
+
+                menuLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                views.forEach(v => v.classList.remove('active'));
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+
+                let titleText = this.innerText.trim();
+                pageTitle.innerHTML = `${titleText} <span class="welcome-name">| Aura Living</span>`;
+
+                if (window.innerWidth <= 992) {
+                    closeSidebar();
+                }
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                triggerAnimations();
+            });
+        });
+
+ 
+        const ctx = document.getElementById('trafficChart').getContext('2d');
+        const trafficChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                datasets: [{
+                    label: 'High-Net Inquiries ($)',
+                    data: [140000, 220000, 190000, 310000, 420000, 380000, 560000, 842500],
+                    borderColor: '#d4b85e',
+                    backgroundColor: 'rgba(212, 184, 94, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#241c18',
+                    pointBorderColor: '#d4b85e',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(74, 59, 50, 0.08)' },
+                        ticks: { color: '#786c65', font: { family: 'Poppins' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#786c65', font: { family: 'Poppins' } }
+                    }
+                }
+            }
+        });
+
+ 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function triggerAnimations() {
+            const animElements = document.querySelectorAll('.scroll-anim');
+            animElements.forEach(el => {
+                el.classList.remove('show');
+                observer.observe(el);
+            });
+        }
+        triggerAnimations();
+
+    </script>
+</body>
+
+</html>

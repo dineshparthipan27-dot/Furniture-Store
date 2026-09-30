@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="Furniture.css">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+       
+         <a href="index.html" class="logo-container">
+            <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+        </a>
+
+        <ul class="nav-menu" data-aos="fade-down" data-aos-duration="800" data-aos-delay="200">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fa-regular fa-user"></i> Login</a></li>
+        </ul>
+
+        <div class="hamburger" data-aos="fade-left" data-aos-duration="800">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <section class="journal-dynamic-hero" id="hero">
+
+         
+        <div class="j-slide active">
+            <div class="j-bg"
+                style="background-image: url('./asset/f23.webp');">
+            </div>
+            <div class="j-overlay"></div>
+            <div class="j-content">
+                <div class="j-badge"><i class="fa-solid fa-pen-nib"></i> The Journal</div>
+                <h1 class="j-title">The Art of <br><span class="gold-italic">Refined Living</span></h1>
+                <p class="j-desc">Immerse yourself in our curated collection of design inspirations, master
+                    craftsmanship stories, and expert interior styling tips.</p>
+                <a href="404.html" class="btn-solid-gold">Explore Journal <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+         
+        <div class="j-slide">
+            <div class="j-bg"
+                style="background-image: url('./asset/f22.webp');">
+            </div>
+            <div class="j-overlay"></div>
+            <div class="j-content">
+                <div class="j-badge"><i class="fa-solid fa-leaf"></i> Design Trends</div>
+                <h1 class="j-title">Organic <br><span class="gold-italic">Modernism</span></h1>
+                <p class="j-desc">Discover the harmony between natural elements, sustainable materials, and sleek
+                    architectural lines for your modern sanctuary.</p>
+                <a href="404.html" class="btn-solid-gold">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+         
+        <div class="j-slide">
+            <div class="j-bg"
+                style="background-image: url('./asset/f21.webp');">
+            </div>
+            <div class="j-overlay"></div>
+            <div class="j-content">
+                <div class="j-badge"><i class="fa-solid fa-hammer"></i> Craftsmanship</div>
+                <h1 class="j-title">Heritage <br><span class="gold-italic">Woodworking</span></h1>
+                <p class="j-desc">A deep dive into the centuries-old traditional techniques and ethical sourcing behind
+                    our bespoke luxury furniture.</p>
+                <a href="404.html" class="btn-solid-gold">View Gallery <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+         
+        <div class="j-slider-controls">
+            <div class="j-dot active" onclick="changeJournalSlide(0)"></div>
+            <div class="j-dot" onclick="changeJournalSlide(1)"></div>
+            <div class="j-dot" onclick="changeJournalSlide(2)"></div>
+        </div>
+
+    </section>
+
+
+    <section class="featured-story-premium" id="featured">
+         
+        <div class="featured-inner-container">
+
+             
+            <div class="premium-center-header" data-aos="fade-up" data-aos-duration="1000">
+                <span class="sub-title">Highlight Article</span>
+                <h2 class="main-title">Featured <span class="gold-italic">Story</span></h2>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="feat-wrapper">
+                 
+                <div class="feat-image-side" data-aos="fade-right" data-aos-duration="1200">
+                    <img src="./asset/f14.webp"
+                        alt="Featured Interior Story" class="feat-main-img">
+                    <div class="feat-category-badge">Interior Trends</div>
+                </div>
+
+                 
+                <div class="feat-content-side" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="feat-meta">
+                        <span><i class="fa-regular fa-calendar"></i> Oct 15, 2026</span>
+                        <span><i class="fa-regular fa-clock"></i> 5 Min Read</span>
+                    </div>
+
+                    <h3 class="feat-title">The Art of Minimalist Luxury in Modern Spaces</h3>
+
+                    <p class="feat-desc">Discover how to perfectly balance clean architectural lines with rich, warm
+                        textures to create a living space that feels both expansive and intimately cozy.</p>
+
+                    <a href="404.html" class="btn-read-gold">
+                        Read Full Story <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="blog-categories-section" id="categories">
+        <div class="blog-container">
+
+            <div class="category-filter-wrap" data-aos="fade-up" data-aos-duration="1000">
+                <a href="404.html" class="cat-pill active">All Articles</a>
+                <a href="404.html" class="cat-pill">Design Trends</a>
+                <a href="404.html" class="cat-pill">Craftsmanship</a>
+                <a href="404.html" class="cat-pill">Home Tours</a>
+                <a href="404.html" class="cat-pill">Styling Tips</a>
+                <a href="404.html" class="cat-pill">Sustainability</a>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="latest-editorials-section bg-warm" id="latest">
+         
+        <div class="editorials-inner-container">
+
+             
+            <div class="premium-center-header" data-aos="fade-down" data-aos-duration="1200">
+                <span class="sub-title">Recent Updates</span>
+                <h2 class="main-title">Latest <span class="gold-italic">Editorials</span></h2>
+                <div class="header-line"></div>
+            </div>
+
+             
+            <div class="editorials-grid">
+
+                 
+                <article class="editorial-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
+                    <div class="ec-image-wrap">
+                        <img src="./asset/f4.webp"
+                            alt="Warm Neutrals">
+                        <div class="ec-tag">Styling Tips</div>
+                    </div>
+                    <div class="ec-content">
+                        <div class="ec-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Sep 22, 2026</span>
+                        </div>
+                        <h3 class="ec-title"><a href="#">Mastering Warm Neutrals in Your Living Room</a></h3>
+                        <p class="ec-desc">Learn how to layer different shades of beige, cream, and taupe to create
+                            depth and interest without using bold colors.</p>
+                        <a href="404.html" class="ec-read-link">Read Article <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </article>
+
+                 
+                <article class="editorial-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
+                    <div class="ec-image-wrap">
+                        <img src="./asset/f5.webp"
+                            alt="Wood Joinery">
+                        <div class="ec-tag">Craftsmanship</div>
+                    </div>
+                    <div class="ec-content">
+                        <div class="ec-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Sep 18, 2026</span>
+                        </div>
+                        <h3 class="ec-title"><a href="#">The Heritage of Hand-Carved Joinery</a></h3>
+                        <p class="ec-desc">An inside look at our workshop where master artisans keep centuries-old
+                            woodworking traditions alive in modern pieces.</p>
+                        <a href="404.html" class="ec-read-link">Read Article <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </article>
+
+                 
+                <article class="editorial-card" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500">
+                    <div class="ec-image-wrap">
+                        <img src="./asset/f6.webp"
+                            alt="Penthouse Tour">
+                        <div class="ec-tag">Home Tours</div>
+                    </div>
+                    <div class="ec-content">
+                        <div class="ec-meta">
+                            <span><i class="fa-regular fa-calendar"></i> Sep 10, 2026</span>
+                        </div>
+                        <h3 class="ec-title"><a href="#">Inside a Bespoke Penthouse Overlooking the Bay</a></h3>
+                        <p class="ec-desc">Take a tour of this recently completed residential project featuring custom
+                            Aura Living furniture in every room.</p>
+                        <a href="404.html" class="ec-read-link">Read Article <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </article>
+
+            </div>
+
+             
+            <div class="load-more-container" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="600">
+                <a href="404.html" class="btn-outline-dark">
+                    <i class="fa-solid fa-rotate-right"></i> Load More Articles
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="masterclass-light-section" id="masterclass">
+        <div class="blog-container">
+            <div class="mc-layout-wrapper">
+
+                 
+                <div class="mc-content-side" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="mc-badge">
+                        <i class="fa-solid fa-star"></i> Editor's Pick
+                    </div>
+
+                    <h2 class="mc-title">Furniture Care <br><span class="gold-italic">Masterclass</span></h2>
+
+                    <p class="mc-desc">Learn the closely guarded secrets to preserving the timeless beauty of solid wood
+                        and premium upholstery directly from our head artisans. Discover practical tips for everyday
+                        luxury.</p>
+
+                    <ul class="mc-feature-list">
+                        <li data-aos="fade-up" data-aos-delay="100"><i class="fa-solid fa-check"></i> Seasonal wood
+                            conditioning techniques</li>
+                        <li data-aos="fade-up" data-aos-delay="200"><i class="fa-solid fa-check"></i> Leather
+                            nourishment and deep protection</li>
+                        <li data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-check"></i> Restoring shine to
+                            brass and gold accents</li>
+                    </ul>
+
+                    <a href="404.html" class="btn-solid-gold-mc" data-aos="fade-up" data-aos-delay="400">
+                        <i class="fa-solid fa-circle-play"></i> Watch Full Series
+                    </a>
+                </div>
+
+                 
+                <div class="mc-video-side" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="mc-video-wrapper">
+                        <img src="./asset/f11.webp"
+                            alt="Masterclass Video Thumbnail" class="mc-video-img">
+                        <div class="mc-video-overlay"></div>
+
+                         
+                        <div class="play-btn-wrapper">
+                            <div class="play-pulse-ring"></div>
+                            <a href="404.html" class="mc-play-btn"><i class="fa-solid fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="newsletter-premium-section" id="newsletter">
+        <div class="blog-container">
+
+            <div class="nl-premium-box" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="nl-icon-top">
+                    <i class="fa-regular fa-envelope-open"></i>
+                </div>
+
+                <h2 class="nl-title">Join The <span class="gold-italic">Inner Circle</span></h2>
+
+                <p class="nl-desc">Subscribe to our exclusive newsletter for the latest design trends, early access to
+                    new collections, and behind-the-scenes stories from our workshop.</p>
+
+                <form class="nl-form-group" id="newsletterForm1" novalidate>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="emailInput1" class="nl-input" placeholder="Enter your email address"
+                            required>
+                    </div>
+                    <button type="submit" class="nl-submit-btn">
+                        <span>Subscribe</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+                 
+                <div class="nl-message" id="formMessage1"></div>
+
+                <p class="nl-disclaimer">By subscribing, you agree to our Privacy Policy. You can unsubscribe at any
+                    time.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="blog-final-cta" id="cta">
+         
+        <div class="cta-bg-image"></div>
+        <div class="cta-overlay-dark"></div>
+
+        <div class="blog-container">
+            <div class="cta-content-wrapper" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="cta-icon-top">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+
+                <span class="cta-subtitle">Begin Your Journey</span>
+                <h2 class="cta-title">Elevate Your <span class="gold-italic">Sanctuary</span></h2>
+                <p class="cta-desc">Ready to bring these design inspirations to life? Collaborate with our master
+                    artisans and interior stylists to curate bespoke luxury pieces tailored specifically for your home.
+                </p>
+
+                <div class="cta-btn-group">
+                    <a href="404.html" class="btn-primary-cta">
+                        <span>Explore Collection</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </a>
+                    <a href="404.html" class="btn-outline-cta">
+                        <span>Book Consultation</span>
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+<footer class="footer-section" id="contact">
+    <div class="footer-container">
+        <div class="footer-brand" data-aos="fade-up" data-aos-duration="1000">
+          
+             <a href="index.html" class="logo-container">
+            <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+        </a>
+            
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>123 Heritage Boulevard, Design District, NY 10012</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+1 (800) 123-4567</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>hello@auraliving.com</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+                <a href="404.html"> <i class="fa-brands fa-youtube"></i></a>
+                <a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+                <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Service</a></li>
+                <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact </a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+            <h4 class="footer-heading">Customer Care</h4>
+            <ul>
+                <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> FAQ</a></li>
+                <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Shipping & Returns</a></li>
+                <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Warranty Info</a></li>
+                <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Care Instructions</a></li>
+                <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Track Order</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-newsletter" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+            <h4 class="footer-heading">Join Our Inner Circle</h4>
+            <p class="newsletter-desc">Subscribe to our newsletter for exclusive updates, early access to sales, and interior design inspiration.</p>
+           <form class="newsletter-form" id="newsletterForm" novalidate>
+    <div class="input-group">
+        <input type="email" id="emailInput" placeholder="Enter your email address" autocomplete="off">
+        <button type="submit" class="subscribe-btn">
+            <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+    </div>
+    <span class="form-message" id="formMessage"></span>
+</form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="bottom-container">
+            <p class="copyright">&copy; 2026 Aura Living. All rights reserved.</p>
+            <div class="legal-links">
+                <a href="404.html">Privacy Policy</a>
+                <a href="404.html">Terms of Service</a>
+                <a href="404.html">Cookie Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="main.js"></script>
+     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+ 
+            const lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+                infinite: false,
+            });
+
+ 
+            lenis.on('scroll', () => {
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+            });
+
+ 
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentJournalSlide = 0;
+            const slides = document.querySelectorAll('.j-slide');
+            const dots = document.querySelectorAll('.j-dot');
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentJournalSlide = index;
+            }
+
+            function nextSlide() {
+                let nextIndex = (currentJournalSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+
+ 
+            function startSlider() {
+                slideInterval = setInterval(nextSlide, 6000);
+            }
+
+            function resetSlider() {
+                clearInterval(slideInterval);
+                startSlider();
+            }
+
+ 
+            window.changeJournalSlide = function (index) {
+                showSlide(index);
+                resetSlider();
+            };
+
+ 
+            if (slides.length > 0) {
+                showSlide(0);
+                startSlider();
+            }
+        });
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('newsletterForm1');
+            const emailInput = document.getElementById('emailInput1');
+            const messageEl = document.getElementById('formMessage1');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Stop default form submission
+
+                const emailValue = emailInput.value.trim();
+ 
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+ 
+                emailInput.classList.remove('error-border');
+                messageEl.className = 'nl-message';
+
+                if (emailValue === '') {
+                    showError('Please enter your email address.');
+                    triggerShake();
+                } else if (!emailRegex.test(emailValue)) {
+                    showError('Please enter a valid email address.');
+                    triggerShake();
+                } else {
+ 
+                    showSuccess('Welcome to the Inner Circle! Thank you for subscribing.');
+                    form.reset(); // Clear input
+                }
+            });
+
+            function showError(msg) {
+                messageEl.textContent = msg;
+                messageEl.classList.add('show', 'error');
+                emailInput.classList.add('error-border');
+            }
+
+            function showSuccess(msg) {
+                messageEl.textContent = msg;
+                messageEl.classList.add('show', 'success');
+                window.location.href = '404.html'
+            }
+
+            function triggerShake() {
+                form.classList.add('shake-anim');
+                setTimeout(() => {
+                    form.classList.remove('shake-anim');
+                }, 400); // Matches animation duration
+            }
+
+ 
+            emailInput.addEventListener('input', () => {
+                emailInput.classList.remove('error-border');
+                messageEl.classList.remove('show', 'error', 'success');
+            });
+        });
+    </script>
+</body>
+
+</html>

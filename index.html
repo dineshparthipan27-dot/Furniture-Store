@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Furniture.css">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+        </a>
+
+        <ul class="nav-menu" data-aos="fade-down" data-aos-duration="800" data-aos-delay="200">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="services.html" class="nav-link">Services</a></li>
+            <li><a href="blog.html" class="nav-link">Blog</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="login.html" class="login-btn"><i class="fa-regular fa-user"></i> Login</a></li>
+        </ul>
+
+        <div class="hamburger" data-aos="fade-left" data-aos-duration="800">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+
+            <span class="hero-badge animate-badge">Welcome to Aura Living</span>
+            <h1 class="hero-title animate-title">Elevate Your Space with Timeless Elegance</h1>
+            <p class="hero-desc animate-desc">
+                Discover our premium handcrafted furniture collection. Every piece is meticulously designed to bring
+                comfort, luxury, and uncompromised style to your everyday living spaces. Transform your house into a
+                home with our exclusive designs.
+            </p>
+            <ul class="hero-features">
+                <li class="animate-feature-1"><i class="fa-solid fa-gem"></i> Premium Craftsmanship</li>
+                <li class="animate-feature-2"><i class="fa-solid fa-shield-halved"></i> 10-Year Warranty</li>
+                <li class="animate-feature-3"><i class="fa-solid fa-truck-fast"></i> Free Home Delivery</li>
+            </ul>
+            <div class="hero-btns animate-btns">
+                <a href="404.html" class="btn btn-primary">Shop Now</a>
+                <a href="404.html" class="btn btn-secondary">Explore Collection</a>
+            </div>
+        </div>
+
+        <div class="hero-visual animate-visual">
+            <div class="css-slider">
+                <div class="slide slide-1"></div>
+                <div class="slide slide-2"></div>
+                <div class="slide slide-3"></div>
+            </div>
+
+            <div class="experience-badge animate-badge-pop">
+                <span class="years">25+</span>
+                <span class="text">Years of<br>Excellence</span>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="category-section" id="categories">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title">Discover Our Collections</span>
+            <h2 class="main-title">Shop by Category</h2>
+        </div>
+
+        <div class="category-grid">
+            <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                <div class="category-img-wrapper">
+                    <img src="./asset/f4.webp"
+                        alt="Living Room" class="category-img">
+                </div>
+                <div class="category-content">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3>Living Room</h3>
+                    <a href="404.html" class="category-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                <div class="category-img-wrapper">
+                    <img src="./asset/f5.webp"
+                        alt="Bedroom" class="category-img">
+                </div>
+                <div class="category-content">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-bed"></i>
+                    </div>
+                    <h3>Bedroom</h3>
+                    <a href="404.html" class="category-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+                <div class="category-img-wrapper">
+                    <img src="./asset/f1.webp"
+                        alt="Dining Room" class="category-img">
+                </div>
+                <div class="category-content">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3>Dining Room</h3>
+                    <a href="404.html" class="category-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
+                <div class="category-img-wrapper">
+                    <img src="./asset/f6.webp"
+                        alt="Home Office" class="category-img">
+                </div>
+                <div class="category-content">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h3>Home Office</h3>
+                    <a href="404.html" class="category-link">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="craftsmanship-section" id="about">
+        <div class="craft-visual">
+
+            <div class="rotating-badge">
+                <svg viewBox="0 0 100 100" class="badge-svg">
+                    <path id="curve" fill="transparent" d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+                    <text>
+                        <textPath href="#curve" fill="#d4b85e" font-size="11.5" font-weight="bold" letter-spacing="2.5">
+                            PREMIUM QUALITY • HANDCRAFTED • </textPath>
+                    </text>
+                </svg>
+                <i class="fa-solid fa-gem badge-icon"></i>
+            </div>
+
+            <div class="img-wrapper main-img-wrapper" data-aos="fade-right" data-aos-duration="1000">
+                <img src="./asset/f7.webp"
+                    alt="Craftsmanship Main" class="main-img">
+                <div class="img-overlay"></div>
+            </div>
+
+            <div class="img-wrapper float-img-wrapper" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                <img src="./asset/f5.webp"
+                    alt="Wood Detail" class="float-img">
+            </div>
+        </div>
+
+        <div class="craft-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+            <span class="sub-title glowing-text">Our Heritage</span>
+            <h2 class="main-title">Mastering the Art of <span class="highlight-text">Fine Woodworking</span></h2>
+            <p class="craft-desc">Every piece at Aura Living is more than just furniture; it is a masterpiece born from
+                passion and precision. Our master artisans blend traditional woodworking techniques with modern
+                innovations to create pieces that stand the test of time.</p>
+
+            <ul class="craft-features">
+                <li class="feature-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="icon-box"><i class="fa-solid fa-tree icon-spin"></i></div>
+                    <div class="feature-text">
+                        <h4>Sustainable Materials</h4>
+                        <span>Ethically sourced premium solid wood.</span>
+                    </div>
+                </li>
+                <li class="feature-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="icon-box"><i class="fa-solid fa-hammer icon-spin"></i></div>
+                    <div class="feature-text">
+                        <h4>Handcrafted Precision</h4>
+                        <span>Detailed with traditional joinery.</span>
+                    </div>
+                </li>
+            </ul>
+
+            <a href="404.html" class="btn btn-primary btn-shine" data-aos="fade-up" data-aos-duration="800"
+                data-aos-delay="600">Discover Our Process</a>
+        </div>
+    </section>
+
+
+    <section class="featured-section" id="featured">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">Exclusive Collection</span>
+            <h2 class="main-title">Featured Products</h2>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="product-img-wrap">
+                    <span class="product-badge pulse-badge">New Arrival</span>
+                    <img src="./asset/f8.webp"
+                        alt="Lounge Chair" class="product-img">
+                    <div class="product-actions">
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-heart"></i></a>
+                        <a href="404.html" class="action-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add
+                            to Cart</a>
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <h3 class="product-name">Velvet Lounge Chair</h3>
+                    <div class="product-price">
+                        <span class="new-price">$899.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="product-img-wrap">
+                    <img src="./asset/f9.webp"
+                        alt="Minimalist Sofa" class="product-img">
+                    <div class="product-actions">
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-heart"></i></a>
+                        <a href="404.html" class="action-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add
+                            to Cart</a>
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="product-name">Minimalist Cloud Sofa</h3>
+                    <div class="product-price">
+                        <span class="old-price">$2,499.00</span>
+                        <span class="new-price">$1,999.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="product-img-wrap">
+                    <span class="product-badge discount-badge">-15%</span>
+                    <img src="./asset/f4.webp"
+                        alt="Coffee Table" class="product-img">
+                    <div class="product-actions">
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-heart"></i></a>
+                        <a href="404.html" class="action-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add
+                            to Cart</a>
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                    <h3 class="product-name">Oak Wood Coffee Table</h3>
+                    <div class="product-price">
+                        <span class="new-price">$450.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <div class="product-img-wrap">
+                    <img src="./asset/f10.webp"
+                        alt="Dining Chair" class="product-img">
+                    <div class="product-actions">
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-heart"></i></a>
+                        <a href="404.html" class="action-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i> Add
+                            to Cart</a>
+                        <a href="404.html" class="action-btn"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="product-name">Nordic Dining Chair</h3>
+                    <div class="product-price">
+                        <span class="new-price">$220.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="new-arrivals-section" id="new-arrivals">
+         
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="1000">
+            <span class="sub-title glowing-text">Just Landed</span>
+            <h2 class="main-title">New Arrivals</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="arrival-grid">
+             
+            <div class="arrival-card large-card" data-aos="fade-right" data-aos-duration="1000">
+                <div class="arrival-img-box">
+                    <img src="./asset/f1.webp"
+                        alt="Modern Sofa" class="arrival-img living-anim">
+                    <div class="arrival-overlay"></div>
+                    <div class="card-shine"></div>
+                    <span class="trend-badge pulse-badge">Trending Now</span>
+                </div>
+
+                <div class="arrival-info">
+                    <div class="info-content">
+                        <h3 class="arrival-title">Signature Curved Sofa</h3>
+                        <p class="arrival-desc">Experience the perfect blend of contemporary design and unparalleled
+                            comfort. Masterfully crafted for modern living spaces.</p>
+                    </div>
+                    <div class="arrival-bottom">
+                        <span class="arrival-price">$3,200</span>
+                        <a href="404.html" class="circle-btn"><i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+             
+            <div class="arrival-card small-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="arrival-img-box">
+                    <img src="./asset/f2.webp"
+                        alt="Lounge Chair" class="arrival-img living-anim">
+                    <div class="arrival-overlay"></div>
+                    <div class="card-shine"></div>
+                </div>
+                <div class="arrival-info">
+                    <div class="info-content">
+                        <h3 class="arrival-title">Leather Accent Chair</h3>
+                    </div>
+                    <div class="arrival-bottom">
+                        <span class="arrival-price">$850</span>
+                        <a href="404.html" class="circle-btn"><i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+             
+            <div class="arrival-card small-card" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
+                <div class="arrival-img-box">
+                    <img src="./asset/f5.webp"
+                        alt="Side Table" class="arrival-img living-anim">
+                    <div class="arrival-overlay"></div>
+                    <div class="card-shine"></div>
+                </div>
+                <div class="arrival-info">
+                    <div class="info-content">
+                        <h3 class="arrival-title">Marble Side Table</h3>
+                    </div>
+                    <div class="arrival-bottom">
+                        <span class="arrival-price">$420</span>
+                        <a href="404.html" class="circle-btn"><i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         
+        <div class="view-all-container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+            <a href="404.html" class="btn btn-primary btn-shine">View All Collection <i
+                    class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+    </section>
+
+
+
+    <section class="offer-section" id="offers">
+        <div class="offer-bg-orb orb-1"></div>
+        <div class="offer-bg-orb orb-2"></div>
+
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">Limited Time Promotions</span>
+            <h2 class="main-title">Exclusive Offers</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="offer-container">
+            <div class="offer-promo-card" data-aos="fade-right" data-aos-duration="1000">
+                <div class="promo-badge pulse-badge">
+                    <i class="fa-solid fa-bolt"></i> Flash Deal
+                </div>
+
+                <h3 class="promo-heading">Luxury Living Room Suite</h3>
+                <p class="promo-copy">Upgrade your primary space with bespoke velvet lounge pieces, solid oak frames,
+                    and handcrafted coffee accents.</p>
+
+                <div class="countdown-strip">
+                    <div class="count-box">
+                        <span class="count-num">02</span>
+                        <span class="count-lbl">Days</span>
+                    </div>
+                    <div class="count-sep">:</div>
+                    <div class="count-box">
+                        <span class="count-num">18</span>
+                        <span class="count-lbl">Hours</span>
+                    </div>
+                    <div class="count-sep">:</div>
+                    <div class="count-box">
+                        <span class="count-num">45</span>
+                        <span class="count-lbl">Mins</span>
+                    </div>
+                    <div class="count-sep">:</div>
+                    <div class="count-box">
+                        <span class="count-num count-sec">30</span>
+                        <span class="count-lbl">Secs</span>
+                    </div>
+                </div>
+
+                <div class="promo-pricing">
+                    <div class="discount-pill">Save 35%</div>
+                    <div class="price-figures">
+                        <span class="cut-price">$2,800</span>
+                        <span class="actual-price">$1,820</span>
+                    </div>
+                </div>
+
+                <a href="404.html" class="btn btn-primary btn-shine">
+                    Claim Offer Now <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="offer-interactive-display" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="showcase-window">
+                    <img src="./asset/f11.webp"
+                        alt="Living Room Deal" class="showcase-img">
+                    <div class="showcase-glare"></div>
+
+                    <div class="hotspot spot-sofa">
+                        <span class="ping-circle"></span>
+                        <div class="spot-card">
+                            <h5>Aura Plush Sofa</h5>
+                            <p>$1,120 <del>$1,600</del></p>
+                        </div>
+                    </div>
+
+                    <div class="hotspot spot-table">
+                        <span class="ping-circle"></span>
+                        <div class="spot-card">
+                            <h5>Sculptural Oak Table</h5>
+                            <p>$700 <del>$1,200</del></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floating-promo-pill pill-top float-left-right">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <div>
+                        <strong>Complimentary Shipping</strong>
+                        <span>Fully insured domestic delivery</span>
+                    </div>
+                </div>
+
+                <div class="floating-promo-pill pill-bottom float-up-down">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <div>
+                        <strong>10-Year Warranty</strong>
+                        <span>Full coverage structural guarantee</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="why-choose-section" id="why-choose">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">Our Core Values</span>
+            <h2 class="main-title">Why Choose Aura Living</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card float-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="card-bg-wipe"></div>
+                <div class="feature-content">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-gem feature-icon"></i>
+                        <div class="icon-ring"></div>
+                    </div>
+                    <h3 class="feature-title">Uncompromising Quality</h3>
+                    <p class="feature-desc">Every piece is crafted with premium, sustainably sourced materials and
+                        meticulous attention to detail, ensuring lifetime durability.</p>
+                </div>
+            </div>
+
+            <div class="feature-card float-2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="card-bg-wipe"></div>
+                <div class="feature-content">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-truck-fast feature-icon"></i>
+                        <div class="icon-ring"></div>
+                    </div>
+                    <h3 class="feature-title">White Glove Delivery</h3>
+                    <p class="feature-desc">Enjoy complimentary shipping and professional in-home assembly by our
+                        dedicated logistics team, fully insured.</p>
+                </div>
+            </div>
+
+            <div class="feature-card float-3" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="card-bg-wipe"></div>
+                <div class="feature-content">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-shield-halved feature-icon"></i>
+                        <div class="icon-ring"></div>
+                    </div>
+                    <h3 class="feature-title">10-Year Warranty</h3>
+                    <p class="feature-desc">We stand behind our craftsmanship with an industry-leading structural
+                        warranty, giving you complete peace of mind.</p>
+                </div>
+            </div>
+
+            <div class="feature-card float-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+                <div class="card-bg-wipe"></div>
+                <div class="feature-content">
+                    <div class="feature-icon-wrapper">
+                        <i class="fa-solid fa-headset feature-icon"></i>
+                        <div class="icon-ring"></div>
+                    </div>
+                    <h3 class="feature-title">24/7 Concierge Support</h3>
+                    <p class="feature-desc">Our interior design experts and support staff are available around the clock
+                        to assist you with styling and queries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="services-section" id="services">
+        <div class="service-bg-shape shape-left"></div>
+        <div class="service-bg-shape shape-right"></div>
+
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">Tailored For You</span>
+            <h2 class="main-title">Our Premium Services</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="services-container">
+            <div class="service-box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="service-img-wrapper">
+                    <img src="./asset/f12.webp"
+                        alt="Bespoke Design">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-pen-ruler"></i>
+                    </div>
+                    <h3 class="service-title">Bespoke Design</h3>
+                    <div class="service-hidden-text">
+                        <p>Collaborate with our master artisans to create custom furniture pieces tailored perfectly to
+                            your unique spatial and aesthetic requirements.</p>
+                        <a href="404.html" class="service-link">Explore Service <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="service-img-wrapper">
+                    <img src="./asset/f13.webp"
+                        alt="Interior Styling">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <h3 class="service-title">Interior Styling</h3>
+                    <div class="service-hidden-text">
+                        <p>Our expert interior designers provide comprehensive styling consultations to ensure your new
+                            furniture harmonizes perfectly with your home.</p>
+                        <a href="404.html" class="service-link">Explore Service <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="service-img-wrapper">
+                    <img src="./asset/f6.webp"
+                        alt="Restoration">
+                    <div class="service-overlay"></div>
+                </div>
+                <div class="service-content">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-hammer"></i>
+                    </div>
+                    <h3 class="service-title">Restoration</h3>
+                    <div class="service-hidden-text">
+                        <p>Breathe new life into your cherished antiques and heirlooms with our professional upholstery
+                            and careful wood restoration services.</p>
+                        <a href="404.html" class="service-link">Explore Service <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="testimonial-section" id="testimonials">
+        <div class="testi-bg-icon">
+            <i class="fa-solid fa-quote-left"></i>
+        </div>
+
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">What They Say</span>
+            <h2 class="main-title">Client Testimonials</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="testi-grid">
+            <div class="testi-card float-anim-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="testi-quote-icon">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+
+                <div class="testi-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <p class="testi-text">"The level of craftsmanship is absolutely unmatched. The signature curved sofa
+                    completely transformed our living space. It's not just furniture; it's a piece of art that offers
+                    incredible comfort."</p>
+
+                <div class="testi-client">
+                    <div class="client-img-wrap">
+                        <img src="./asset/woman1.webp"
+                            alt="Client 1">
+                        <div class="img-spin-ring"></div>
+                    </div>
+                    <div class="client-info">
+                        <h4>Sarah Jenkins</h4>
+                        <span>Interior Designer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card float-anim-2" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <div class="testi-quote-icon">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+
+                <div class="testi-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+
+                <p class="testi-text">"From the bespoke design consultation to the white-glove delivery, the entire
+                    experience was flawless. The solid oak dining table is now the centerpiece of our family
+                    gatherings."</p>
+
+                <div class="testi-client">
+                    <div class="client-img-wrap">
+                        <img src="./asset/man1.webp"
+                            alt="Client 2">
+                        <div class="img-spin-ring"></div>
+                    </div>
+                    <div class="client-info">
+                        <h4>David Chen</h4>
+                        <span>Homeowner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testi-card float-anim-3" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <div class="testi-quote-icon">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+
+                <div class="testi-rating">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <p class="testi-text">"I was amazed by their dedication to sustainable materials without compromising on
+                    luxury. The lounge chair I purchased is stunning, comfortable, and ethically made. Highly
+                    recommended!"</p>
+
+                <div class="testi-client">
+                    <div class="client-img-wrap">
+                        <img src="./asset/woman3.webp"
+                            alt="Client 3">
+                        <div class="img-spin-ring"></div>
+                    </div>
+                    <div class="client-info">
+                        <h4>Emily Roberts</h4>
+                        <span>Architecture Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="journal-section" id="blog">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="800">
+            <span class="sub-title glowing-text">Design Journal</span>
+            <h2 class="main-title">Latest Furniture Trends</h2>
+            <div class="header-divider"></div>
+        </div>
+
+        <div class="journal-container">
+
+            <article class="journal-item">
+                <div class="journal-visual" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="img-reveal-wrap">
+                        <img src="./asset/f14.webp"
+                            alt="Japandi Style" class="journal-img">
+                    </div>
+                </div>
+                <div class="journal-content" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="journal-meta">
+                        <span class="j-category">Interior Design</span>
+                        <span class="j-dot"></span>
+                        <span class="j-date">Sep 24, 2026</span>
+                    </div>
+                    <h3 class="journal-title">The Rise of Japandi Style in Modern Homes</h3>
+                    <p class="journal-desc">Discover how blending Japanese minimalism with Scandinavian functionality
+                        creates the ultimate calming and aesthetically pleasing space for your everyday life.</p>
+                    <a href="404.html" class="journal-link">
+                        <span class="link-text">Read Article</span>
+                        <span class="link-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="journal-item reverse-layout">
+                <div class="journal-content" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="journal-meta">
+                        <span class="j-category">Sustainability</span>
+                        <span class="j-dot"></span>
+                        <span class="j-date">Sep 18, 2026</span>
+                    </div>
+                    <h3 class="journal-title">Embracing Sustainable Materials in Luxury</h3>
+                    <p class="journal-desc">Explore our commitment to eco-friendly practices and how sustainably sourced
+                        solid wood is shaping the future of high-end, responsible furniture design.</p>
+                    <a href="404.html" class="journal-link">
+                        <span class="link-text">Read Article</span>
+                        <span class="link-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    </a>
+                </div>
+                <div class="journal-visual" data-aos="fade-left" data-aos-duration="1200">
+                    <div class="img-reveal-wrap">
+                        <img src="./asset/f15.webp"
+                            alt="Sustainable Materials" class="journal-img">
+                    </div>
+                </div>
+            </article>
+
+            <article class="journal-item">
+                <div class="journal-visual" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="img-reveal-wrap">
+                        <img src="./asset/f16.webp"
+                            alt="Small Spaces" class="journal-img">
+                    </div>
+                </div>
+                <div class="journal-content" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="200">
+                    <div class="journal-meta">
+                        <span class="j-category">Tips & Tricks</span>
+                        <span class="j-dot"></span>
+                        <span class="j-date">Sep 10, 2026</span>
+                    </div>
+                    <h3 class="journal-title">Maximizing Elegance in Compact Living Spaces</h3>
+                    <p class="journal-desc">Learn expert styling techniques to make small apartments feel spacious,
+                        luxurious, and perfectly organized with smart modular pieces and lighting.</p>
+                    <a href="404.html" class="journal-link">
+                        <span class="link-text">Read Article</span>
+                        <span class="link-icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+
+
+    <footer class="footer-section" id="contact">
+        <div class="footer-container">
+            <div class="footer-brand" data-aos="fade-up" data-aos-duration="1000">
+                <a href="index.html" class="">
+                    <img src="./asset/logo 1.webp" alt="Company Logo" class="logo-img">
+                </a>
+
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>123 Heritage Boulevard, Design District, NY 10012</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+1 (800) 123-4567</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>hello@auraliving.com</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="404.html"> <i class="fa-brands fa-youtube"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About</a></li>
+                    <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Service</a></li>
+                    <li><a href="blog.html"><i class="fa-solid fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <h4 class="footer-heading">Customer Care</h4>
+                <ul>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Shipping & Returns</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Warranty Info</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Care Instructions</a></li>
+                    <li><a href="404.html"><i class="fa-solid fa-chevron-right"></i> Track Order</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-newsletter" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                <h4 class="footer-heading">Join Our Inner Circle</h4>
+                <p class="newsletter-desc">Subscribe to our newsletter for exclusive updates, early access to sales, and
+                    interior design inspiration.</p>
+                <form class="newsletter-form" id="newsletterForm" novalidate>
+                    <div class="input-group">
+                        <input type="email" id="emailInput" placeholder="Enter your email address" autocomplete="off">
+                        <button type="submit" class="subscribe-btn">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </button>
+                    </div>
+                    <span class="form-message" id="formMessage"></span>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="bottom-container">
+                <p class="copyright">&copy; 2026 Aura Living. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="404.html">Privacy Policy</a>
+                    <a href="404.html">Terms of Service</a>
+                    <a href="404.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+ 
+            const lenis = new Lenis({
+                duration: 1.5, 
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+                infinite: false,
+            });
+
+ 
+            lenis.on('scroll', () => {
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+            });
+
+ 
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        });
+    </script>
+</body>
+
+</html>
