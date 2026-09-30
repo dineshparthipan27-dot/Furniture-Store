@@ -17,21 +17,19 @@ body.no-scroll {
 }
 
 
-/* =========================================
-   PREMIUM LOADER STYLES (Aura Living Theme)
-========================================= */
+
 .premium-loader {
     position: fixed;
     inset: 0;
-    background-color: #1a1411; /* Premium Dark Background */
-    z-index: 99999; /* Ensure it stays on top of everything */
+    background-color: #1a1411;
+    z-index: 99999; 
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.8s ease-in-out, visibility 0.8s;
 }
 
-/* Class added by JS to hide the loader */
+
 .premium-loader.hidden {
     opacity: 0;
     visibility: hidden;
@@ -45,16 +43,16 @@ body.no-scroll {
     justify-content: center;
 }
 
-/* Center Diamond Icon */
+
 .loader-icon {
     font-size: 26px;
-    color: #d4b85e; /* Aura Gold */
+    color: #d4b85e; 
     position: absolute;
     top: 36px;
     animation: pulseGlow 1.5s infinite alternate;
 }
 
-/* Rings Container */
+
 .loader-rings {
     position: relative;
     width: 100px;
@@ -62,14 +60,14 @@ body.no-scroll {
     margin-bottom: 25px;
 }
 
-/* The Golden Rings */
+
 .ring {
     position: absolute;
     inset: 0;
     border-radius: 50%;
     border: 2px solid transparent;
-    border-top-color: #d4b85e; /* Gold */
-    border-right-color: rgba(212, 184, 94, 0.3); /* Subtle Gold */
+    border-top-color: #d4b85e; 
+    border-right-color: rgba(212, 184, 94, 0.3); 
     animation: premiumSpin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 }
 
@@ -81,7 +79,7 @@ body.no-scroll {
     animation: premiumSpin 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite reverse;
 }
 
-/* Text Under Loader */
+
 .loader-text {
     font-family: 'Playfair Display', serif;
     color: #d4b85e;
@@ -92,7 +90,7 @@ body.no-scroll {
     animation: pulseText 1.5s infinite alternate;
 }
 
-/* --- Animations --- */
+
 @keyframes premiumSpin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
