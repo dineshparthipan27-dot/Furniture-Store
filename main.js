@@ -90,3 +90,24 @@ function showValidationMessage(message, type) {
         emailInput.classList.add('success-border');
     }
 }
+
+
+
+// ==========================================
+// ⏳ PREMIUM LOADER TIMEOUT (2 SECONDS)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("premium-loader");
+    
+    // Exactly 2 Seconds (2000 ms) delay
+    setTimeout(() => {
+        // Add hidden class to trigger CSS fade-out animation
+        loader.classList.add("hidden");
+        
+        // Completely remove the loader from DOM after fade-out finishes (800ms)
+        setTimeout(() => {
+            loader.remove();
+        }, 800);
+        
+    }, 2000); 
+});
