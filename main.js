@@ -74,7 +74,7 @@ newsletterForm.addEventListener('submit', function(e) {
         setTimeout(() => {
             formMessage.classList.remove('show', 'success');
             emailInput.classList.remove('success-border');
-            window.location.href = '404,html'
+            window.location.href = '404.html'
         }, 400);
     }
 });
