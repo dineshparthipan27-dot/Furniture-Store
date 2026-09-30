@@ -1579,3 +1579,73 @@
         max-width: 100%;
     }
 }
+
+
+
+/* =========================================
+   PREMIUM SHINE BUTTON STYLES
+========================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 36px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    border-radius: 40px; /* Pill shape for luxury feel */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    overflow: hidden; /* Important for shine effect */
+}
+
+/* Primary Gold Theme */
+.btn-primary {
+    background-color: #d4b85e; /* Aura Gold */
+    color: #1a1411; /* Dark text */
+    border: 2px solid #d4b85e;
+}
+
+/* Hover State */
+.btn-primary:hover {
+    background-color: transparent; /* Or #1a1411 if background is white */
+    color: #d4b85e;
+    box-shadow: 0 15px 30px rgba(212, 184, 94, 0.25);
+    transform: translateY(-3px);
+}
+
+/* Icon Animation on Hover */
+.btn i {
+    font-size: 16px;
+    transition: transform 0.4s ease;
+}
+
+.btn:hover i {
+    transform: translateX(6px); /* Arrow moves right */
+}
+
+/* =========================================
+   SHINE ANIMATION EFFECT
+========================================= */
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: premiumShine 3s infinite;
+    pointer-events: none; /* Prevents blocking clicks */
+}
+
+@keyframes premiumShine {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
